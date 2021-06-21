@@ -1,0 +1,25 @@
+api:
+  apiKey: test-key
+  baseUrl: base-url/
+  webClient:
+    base:
+        connectTimeoutMs: 200
+        connectionRequestTimeoutMs: 100
+        readTimeoutMs: 1000
+        poolSize: 1500
+        totalRequestTimeout: 1200
+    override:
+        connectTimeoutMs: 100
+        connectionRequestTimeoutMs: 50
+        readTimeoutMs: 500
+        poolSize: 750
+        totalRequestTimeout: 800
+  admin:
+    basicAuth:
+      credentials:
+        - username: ${BASIC_AUTH_USER:admin}
+          password: ${BASIC_AUTH_PASSWORD:admin}
+spring:
+  config:
+    activate:
+      on-profile: test

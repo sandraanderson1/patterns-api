@@ -1,0 +1,143 @@
+{
+  "response": {
+    "status": "ok",
+    "userTier": "developer",
+    "total": 63950,
+    "startIndex": 1,
+    "pageSize": 10,
+    "currentPage": 1,
+    "pages": 6395,
+    "results": [
+      {
+        "id": "100-teachers/100-teachers",
+        "type": "paid-content",
+        "webTitle": "100 teachers, 100 passions, 100 ways to shape lives",
+        "webUrl": "https://www.theguardian.com/100-teachers/100-teachers",
+        "apiUrl": "https://content.guardianapis.com/100-teachers/100-teachers",
+        "description": "<p><br></p>",
+        "activeSponsorships": [
+          {
+            "sponsorshipType": "paid-content",
+            "sponsorName": "Department for Education",
+            "sponsorLogo": "https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png",
+            "sponsorLink": "https://ad.doubleclick.net/ddm/trackclk/N6198.133705.GUARDIAN.CO.UK/B25261716.293023946;dc_trk_aid=486309559;dc_trk_cid=144391788;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755}",
+            "sponsorLogoDimensions": {
+              "width": 210,
+              "height": 135
+            },
+            "highContrastSponsorLogo": "https://static.theguardian.com/commercial/sponsor/25/Jan/2021/0a7171f8-13f5-4e3a-a47a-9d117f65a272-DfE-lockup-Online-WHITE-TIM.png",
+            "highContrastSponsorLogoDimensions": {
+              "width": 210,
+              "height": 135
+            },
+            "validTo": "2022-04-30T22:59:00Z"
+          }
+        ],
+        "paidContentType": "Topic"
+      },
+      {
+        "id": "2019-family-gift-guide/2019-family-gift-guide",
+        "type": "paid-content",
+        "webTitle": "2019 family gift guide",
+        "webUrl": "https://www.theguardian.com/2019-family-gift-guide/2019-family-gift-guide",
+        "apiUrl": "https://content.guardianapis.com/2019-family-gift-guide/2019-family-gift-guide",
+        "activeSponsorships": [
+          {
+            "sponsorshipType": "paid-content",
+            "sponsorName": "Google",
+            "sponsorLogo": "https://static.theguardian.com/commercial/sponsor/11/Nov/2019/522e3225-cc9f-4aca-b779-1885b95b2241-GoogleNest_Logo_Horizontal-280 copy-v2.png",
+            "sponsorLink": "https://nest.com/",
+            "sponsorLogoDimensions": {
+              "width": 280,
+              "height": 97
+            }
+          }
+        ],
+        "paidContentType": "Topic"
+      },
+      {
+        "id": "20th-century-fox-the-shape-of-water/20th-century-fox-the-shape-of-water",
+        "type": "paid-content",
+        "webTitle": "20th Century Fox: The Shape of Water",
+        "webUrl": "https://www.theguardian.com/20th-century-fox-the-shape-of-water/20th-century-fox-the-shape-of-water",
+        "apiUrl": "https://content.guardianapis.com/20th-century-fox-the-shape-of-water/20th-century-fox-the-shape-of-water",
+        "activeSponsorships": [
+          {
+            "sponsorshipType": "paid-content",
+            "sponsorName": "The Shape of Water",
+            "sponsorLogo": "https://static.theguardian.com/commercial/sponsor/08/Jan/2018/4f03740b-49c7-4484-a6e5-a697ad4aa560-ShapeOfWater.jpg",
+            "sponsorLink": "https://youtu.be/EQH3jqetJoY",
+            "aboutLink": "https://www.theguardian.com/info/2016/jan/25/content-funding",
+            "sponsorLogoDimensions": {
+              "width": 140,
+              "height": 90
+            }
+          }
+        ],
+        "paidContentType": "Topic"
+      },
+      {
+        "id": "a-different-christmas/series/gifting-reimagined",
+        "type": "series",
+        "sectionId": "a-different-christmas",
+        "sectionName": "A different Christmas",
+        "webTitle": "Gifting reimagined",
+        "webUrl": "https://www.theguardian.com/a-different-christmas/series/gifting-reimagined",
+        "apiUrl": "https://content.guardianapis.com/a-different-christmas/series/gifting-reimagined"
+      },
+      {
+        "id": "a-different-christmas/series/on-the-climate-frontline",
+        "type": "series",
+        "sectionId": "a-different-christmas",
+        "sectionName": "A different Christmas",
+        "webTitle": "On the climate frontline",
+        "webUrl": "https://www.theguardian.com/a-different-christmas/series/on-the-climate-frontline",
+        "apiUrl": "https://content.guardianapis.com/a-different-christmas/series/on-the-climate-frontline"
+      },
+      {
+        "id": "a-shot-of-sustainability/a-shot-of-sustainability",
+        "type": "keyword",
+        "sectionId": "a-shot-of-sustainability",
+        "sectionName": "A shot of sustainability",
+        "webTitle": "a shot of sustainability",
+        "webUrl": "https://www.theguardian.com/a-shot-of-sustainability/a-shot-of-sustainability",
+        "apiUrl": "https://content.guardianapis.com/a-shot-of-sustainability/a-shot-of-sustainability"
+      },
+      {
+        "id": "aberdeen-grampian/aberdeen-grampian",
+        "type": "keyword",
+        "sectionId": "aberdeen-grampian",
+        "sectionName": "Aberdeen-Grampian",
+        "webTitle": "Aberdeen-Grampian",
+        "webUrl": "https://www.theguardian.com/aberdeen-grampian/aberdeen-grampian",
+        "apiUrl": "https://content.guardianapis.com/aberdeen-grampian/aberdeen-grampian"
+      },
+      {
+        "id": "about/about",
+        "type": "keyword",
+        "webTitle": "About",
+        "webUrl": "https://www.theguardian.com/about/about",
+        "apiUrl": "https://content.guardianapis.com/about/about"
+      },
+      {
+        "id": "about/series/guardian-200th-birthday-brand-films",
+        "type": "series",
+        "sectionId": "about",
+        "sectionName": "About",
+        "webTitle": "Guardian 200th birthday brand films",
+        "webUrl": "https://www.theguardian.com/about/series/guardian-200th-birthday-brand-films",
+        "apiUrl": "https://content.guardianapis.com/about/series/guardian-200th-birthday-brand-films",
+        "description": "<p>Videos celebrating our values</p>"
+      },
+      {
+        "id": "about/test-tag--do-not-use-this-",
+        "type": "keyword",
+        "sectionId": "about",
+        "sectionName": "About",
+        "webTitle": "Test Tag (DO NOT USE THIS)",
+        "webUrl": "https://www.theguardian.com/about/test-tag--do-not-use-this-",
+        "apiUrl": "https://content.guardianapis.com/about/test-tag--do-not-use-this-"
+      }
+    ]
+  }
+}
