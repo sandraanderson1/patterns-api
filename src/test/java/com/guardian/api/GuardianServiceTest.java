@@ -1,5 +1,6 @@
 package com.guardian.api;
 
+import com.guardian.api.errorHandlers.CommonErrorHandler;
 import com.guardian.api.mappers.GuardianToClientResponseMapper;
 import com.guardian.api.services.GuardianService;
 import okhttp3.mockwebserver.MockResponse;
@@ -9,7 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,15 +25,21 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+
 @ExtendWith(MockitoExtension.class)
 @EnableAutoConfiguration
-@SpringBootTest(classes = {ApplicationProps.class})
+@SpringBootTest(classes = {GuardianProps.class})
 @ActiveProfiles("test")
 class GuardianServiceTest {
 
     private static MockWebServer mockWebServer;
     private static MockResponse mockResponse;
-
+    @Mock
+    private CommonErrorHandler errorHandler;
+    @Autowired
+    private GuardianProps guardianProps;
     private GuardianService service;
 
     @BeforeAll
@@ -41,7 +50,7 @@ class GuardianServiceTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        service = new GuardianService(new GuardianToClientResponseMapper(), WebClient.create(mockWebServer.url("/").toString()));
+        service = new GuardianService(guardianProps, new GuardianToClientResponseMapper(), WebClient.create(mockWebServer.url("/").toString()), errorHandler);
         mockResponse = new MockResponse();
         mockResponse.addHeader("Content-Type", "application/json; charset=utf-8");
         mockResponse.setBody(mockResponse());
@@ -59,6 +68,7 @@ class GuardianServiceTest {
 
     @Test
     void read_returnsServerErrorExceptionIfDownstreamResponds5xx() {
+        given(errorHandler.handleDownstreamError(any(), any())).willThrow(HttpServerErrorException.class);
         mockResponse.setResponseCode(500);
         mockWebServer.enqueue(mockResponse);
 
@@ -68,7 +78,8 @@ class GuardianServiceTest {
     }
 
     @Test
-    void read_returnsClientErrorExceptionIfDownstreamResponds5xx() {
+    void read_returnsClientErrorExceptionIfDownstreamResponds4xx() {
+        given(errorHandler.handleDownstreamError(any(), any())).willThrow(HttpClientErrorException.class);
         mockResponse.setResponseCode(404);
         mockWebServer.enqueue(mockResponse);
 

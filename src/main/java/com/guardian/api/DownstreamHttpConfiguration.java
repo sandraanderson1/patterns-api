@@ -1,6 +1,7 @@
 package com.guardian.api;
 
 import com.guardian.api.webClient.BaseWebClientProps;
+import com.guardian.api.webClient.OverrideWebClientProps;
 import com.guardian.api.webClient.WebClientFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +18,10 @@ public class DownstreamHttpConfiguration {
         return webClientFactory.getInstance(baseWebClientProps);
     }
 
-//    @Autowired
-//    @Bean("override")
-//    public WebClient createClientConfiguration(
-//            WebClientFactory webClientFactory,
-//            OverrideWebClientProps overrideWebClientProps
-//    ) {
-//        return webClientFactory.getInstance(overrideWebClientProps);
-//    }
+    @Autowired
+    @Bean("override")
+    public WebClient createClientConfiguration(WebClientFactory webClientFactory,
+                                               OverrideWebClientProps overrideWebClientProps) {
+        return webClientFactory.getInstance(overrideWebClientProps);
+    }
 }

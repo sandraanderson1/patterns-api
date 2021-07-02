@@ -1,4 +1,4 @@
-package com.guardian.api.response;
+package com.guardian.api.response.guardian;
 
 import com.guardian.api.dataModels.UserData;
 import com.guardian.api.response.guardian.GuardianArticle;

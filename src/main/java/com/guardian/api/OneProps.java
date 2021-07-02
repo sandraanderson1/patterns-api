@@ -1,18 +1,16 @@
-package com.guardian.api.webClient;
+package com.guardian.api;
 
 import lombok.Getter;
-import lombok.NonNull;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 @Getter
-@NonNull
-@Component
+@Setter
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "api.webclient.base")
-public class BaseWebClientProps extends WebClientProps {
-    String baseUrl;
+@ConfigurationProperties(prefix = "api.one")
+public class OneProps {
+    private String baseUrl;
 }

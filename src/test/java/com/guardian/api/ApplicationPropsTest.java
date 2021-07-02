@@ -7,12 +7,12 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.Assert.assertEquals;
 
-@SpringBootTest(classes = ApplicationProps.class)
+@SpringBootTest(classes = GuardianProps.class)
 @ActiveProfiles("test")
 class ApplicationPropsTest {
 
     @Autowired
-    private ApplicationProps applicationProps;
+    private GuardianProps applicationProps;
 
     @Test
     void returnsApiKey() {

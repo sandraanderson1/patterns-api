@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "api")
-public class ApplicationProps {
+@ConfigurationProperties(prefix = "api.guardian")
+public class GuardianProps {
     private String apiKey;
     private String baseUrl;
 }

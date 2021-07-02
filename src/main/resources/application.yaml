@@ -3,8 +3,11 @@ spring:
     active: dev
 
 api:
-  apiKey: '${API_KEY}'
-  baseUrl: https://content.guardianapis.com/
+  guardian:
+    apiKey: '${API_KEY}'
+    baseUrl: https://content.guardianapis.com/search?api-key=
+  one:
+    baseUrl: https://www.affirmations.dev/
   webClient:
     base:
         connectTimeoutMs: 200

@@ -3,6 +3,7 @@ package com.guardian.api.dataModels;
 import lombok.Getter;
 
 @Getter
+//no Lombok builder pattern
 public class UserData {
 
     private String userTier;
@@ -10,7 +11,7 @@ public class UserData {
 
     public static class Builder {
 
-        private String userTier; //This is important, so we'll pass it to the constructor.
+        private String userTier;
         private String userName;
 
         public Builder(String userTier) {

@@ -1,6 +1,6 @@
 package com.guardian.api.webClient;
 
-import com.guardian.api.ApplicationProps;
+import com.guardian.api.GuardianProps;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WebClientFactory {
 
-    private final ApplicationProps applicationProps;
+    private final GuardianProps applicationProps;
 
-    public WebClientFactory(ApplicationProps applicationProps) {
+    public WebClientFactory(GuardianProps applicationProps) {
         this.applicationProps = applicationProps;
     }
 
@@ -34,7 +34,6 @@ public class WebClientFactory {
 
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .baseUrl(applicationProps.getBaseUrl() + "search?api-key=" + applicationProps.getApiKey())
                 .build();
     }
 }

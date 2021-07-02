@@ -24,7 +24,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
             logError(exchange, throwable);
             exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
         }
-        if (throwable instanceof InternalServerError || throwable instanceof RuntimeException) {
+        if (throwable instanceof RuntimeException) {
             logError(exchange, throwable);
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         }

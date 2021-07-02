@@ -1,7 +1,7 @@
 package com.guardian.handlers;
 
-import com.guardian.api.services.GuardianService;
-import com.guardian.api.response.guardian.GuardianResponse;
+import com.guardian.api.response.one.OneResponse;
+import com.guardian.api.services.OneService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -12,16 +12,16 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Slf4j
 @Component
-public class GuardianHandler {
+public class OneHandler {
 
-    private GuardianService guardianService;
+    private OneService oneService;
 
-    public GuardianHandler(GuardianService guardianService) {
-        this.guardianService = guardianService;
+    public OneHandler(OneService oneService) {
+        this.oneService = oneService;
     }
 
     public Mono<ServerResponse> getResponse(ServerRequest serverRequest) {
-        return guardianService.read()
-                .flatMap(s -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(s), GuardianResponse.class));
+        return oneService.read()
+                .flatMap(s -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(s), OneResponse.class));
     }
 }

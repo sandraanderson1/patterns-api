@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "api.weblient.override")
+@ConfigurationProperties(prefix = "api.webclient.override")
 public class OverrideWebClientProps extends WebClientProps {
 }

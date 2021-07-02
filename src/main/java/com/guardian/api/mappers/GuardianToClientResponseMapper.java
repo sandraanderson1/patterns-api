@@ -1,7 +1,7 @@
 package com.guardian.api.mappers;
 
 import com.guardian.api.dataModels.UserData;
-import com.guardian.api.response.ClientResponse;
+import com.guardian.api.response.guardian.ClientResponse;
 import com.guardian.api.response.guardian.GuardianResponse;
 import org.springframework.stereotype.Component;
 

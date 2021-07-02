@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class GuardianResponseDAO {
+public class GuardianDetailedResponse {
     private String status;
     private String userTier;
     private String total;

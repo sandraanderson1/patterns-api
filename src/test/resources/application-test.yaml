@@ -1,6 +1,9 @@
 api:
-  apiKey: test-key
-  baseUrl: base-url/
+  guardian:
+    apiKey: test-key
+    baseUrl: guardian-base-url/
+  oneline:
+    baseUrl: oneline-base-url/
   webClient:
     base:
         connectTimeoutMs: 200
