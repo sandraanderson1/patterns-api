@@ -13,15 +13,15 @@ public class DownstreamHttpConfiguration {
 
     @Autowired
     @Bean("base")
-    public WebClient createClientConfiguration(WebClientFactory webClientFactory,
-                                               BaseWebClientProps baseWebClientProps) {
+    public WebClient createBaseWebClientConfiguration(WebClientFactory webClientFactory,
+                                                      BaseWebClientProps baseWebClientProps) {
         return webClientFactory.getInstance(baseWebClientProps);
     }
 
     @Autowired
     @Bean("override")
-    public WebClient createClientConfiguration(WebClientFactory webClientFactory,
-                                               OverrideWebClientProps overrideWebClientProps) {
+    public WebClient createOverrideWebClientConfiguration(WebClientFactory webClientFactory,
+                                                      OverrideWebClientProps overrideWebClientProps) {
         return webClientFactory.getInstance(overrideWebClientProps);
     }
 }

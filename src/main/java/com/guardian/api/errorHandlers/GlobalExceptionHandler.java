@@ -4,6 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.reactive.function.client.WebClientResponseException.InternalServerError;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
@@ -24,7 +27,11 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
             logError(exchange, throwable);
             exchange.getResponse().setStatusCode(HttpStatus.BAD_REQUEST);
         }
-        if (throwable instanceof RuntimeException) {
+        if (throwable instanceof HttpClientErrorException) {
+            logError(exchange, throwable);
+            exchange.getResponse().setStatusCode(HttpStatus.NOT_FOUND);
+        }
+        if (throwable instanceof HttpServerErrorException) {
             logError(exchange, throwable);
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         }

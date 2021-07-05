@@ -2,13 +2,18 @@ package com.guardian.api.services;
 
 import com.guardian.Downstream;
 import com.guardian.api.OneProps;
-import com.guardian.api.errorHandlers.CommonErrorHandler;
+import com.guardian.api.response.guardian.GuardianResponse;
 import com.guardian.api.response.one.OneResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import static com.guardian.ExceptionsFactory.createHttpClientException;
+import static com.guardian.ExceptionsFactory.createHttpServerException;
 
 @Slf4j
 @Service
@@ -16,28 +21,30 @@ public class OneService {
 
     private final OneProps oneProps;
     private final WebClient webClient;
-    private final CommonErrorHandler errorHandler;
 
     public OneService(OneProps oneProps,
-                      @Qualifier("override") WebClient webClient, CommonErrorHandler errorHandler) {
+                      @Qualifier("override") WebClient webClient) {
         this.oneProps = oneProps;
         this.webClient = webClient;
-        this.errorHandler = errorHandler;
     }
 
     public Mono<OneResponse> read() {
         return webClient
                 .get()
                 .uri(oneProps.getBaseUrl())
-                .retrieve()
-                .bodyToMono(OneResponse.class)
-                .doOnError(error -> log.error("Reported error: {}, {}", error.getMessage(), error.getStackTrace()))
-                .onErrorResume(throwable -> {
-                    Mono response = errorHandler.handleDownstreamError(throwable, Downstream.ONE);
-                    if (response != null) return response;
-                    return Mono.error(throwable);
-                });
+                .exchangeToMono(this::handleResponse)
+                .doOnError(error -> log.error("Reported error: {}, {}", error.getMessage(), error.getStackTrace()));
+    }
 
-        //error handler not working
+    private Mono<OneResponse> handleResponse(ClientResponse response) {
+        if (response.statusCode().equals(HttpStatus.OK)) {
+            return response.bodyToMono(OneResponse.class);
+        } else if (response.statusCode().is4xxClientError()) {
+            return Mono.error(createHttpClientException(Downstream.ONE));
+        } else if (response.statusCode().is5xxServerError()) {
+            return Mono.error(createHttpServerException(Downstream.ONE));
+        } else {
+            return response.createException().flatMap(Mono::error);
+        }
     }
 }

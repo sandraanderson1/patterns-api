@@ -7,12 +7,12 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class ClientResponse {
+public class GuardianClientResponse {
     private UserData userData;
     private String status;
     private List<GuardianArticle> results;
 
-    public ClientResponse(UserData userData, String status, List<GuardianArticle> results) {
+    public GuardianClientResponse(UserData userData, String status, List<GuardianArticle> results) {
         this.userData = userData;
         this.status = status;
         this.results = results;
