@@ -35,6 +35,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
             logError(exchange, throwable);
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        //need to be able to map any other exceptions to default behaviour
         return Mono.empty();
     }
 

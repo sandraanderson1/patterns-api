@@ -1,5 +1,6 @@
 package com.guardian.api;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,11 +17,11 @@ class ApplicationPropsTest {
 
     @Test
     void returnsApiKey() {
-        assertEquals(applicationProps.getApiKey(), "test-key");
+        Assertions.assertEquals(applicationProps.getApiKey(), "test-key");
     }
 
     @Test
     void returnsBaseUrl() {
-        assertEquals(applicationProps.getBaseUrl(), "base-url");
+        Assertions.assertEquals(applicationProps.getBaseUrl(), "guardian-base-url/");
     }
 }

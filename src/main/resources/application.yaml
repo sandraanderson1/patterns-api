@@ -4,7 +4,7 @@ spring:
 
 api:
   guardian:
-    apiKey: '${API_KEY}'
+    apiKey: '32e6d3d4-89f5-448a-a48b-4ca2c5d3a5ae'
     baseUrl: https://content.guardianapis.com/search?api-key=
   one:
     baseUrl: https://www.affirmations.dev/

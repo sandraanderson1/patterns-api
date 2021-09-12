@@ -33,18 +33,25 @@ public class OneService {
                 .get()
                 .uri(oneProps.getBaseUrl())
                 .exchangeToMono(this::handleResponse)
-                .doOnError(error -> log.error("Reported error: {}, {}", error.getMessage(), error.getStackTrace()));
+                .doOnError(error -> log.error("Reported error: {}", error.getMessage()));
     }
 
     private Mono<OneResponse> handleResponse(ClientResponse response) {
         if (response.statusCode().equals(HttpStatus.OK)) {
             return response.bodyToMono(OneResponse.class);
         } else if (response.statusCode().is4xxClientError()) {
+            logDownstreamError(response);
             return Mono.error(createHttpClientException(Downstream.ONE));
         } else if (response.statusCode().is5xxServerError()) {
+            logDownstreamError(response);
             return Mono.error(createHttpServerException(Downstream.ONE));
         } else {
+            logDownstreamError(response);
             return response.createException().flatMap(Mono::error);
         }
+    }
+
+    private void logDownstreamError(ClientResponse response) {
+        log.error("Reported error from Downstream: {}, {}", Downstream.ONE, response.statusCode());
     }
 }
