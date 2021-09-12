@@ -1,5 +1,6 @@
 package com.guardian.api;
 
+import com.guardian.api.exceptions.UnsupportedOperationException;
 import com.guardian.api.mappers.GuardianToClientResponseMapper;
 import com.guardian.api.services.GuardianService;
 import okhttp3.mockwebserver.MockResponse;
@@ -18,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
@@ -71,7 +71,6 @@ class GuardianServiceTest {
                 .verify();
     }
 
-    //fix global exception handler - returning 500 not 400
     @Ignore
     @Test
     void read_returnsClientErrorExceptionIfDownstreamResponds4xx() {
@@ -89,7 +88,7 @@ class GuardianServiceTest {
         mockWebServer.enqueue(mockResponse);
 
         StepVerifier.create(service.read())
-                .expectError(HttpServerErrorException.class)
+                .expectError(UnsupportedOperationException.class)
                 .verify();
     }
 

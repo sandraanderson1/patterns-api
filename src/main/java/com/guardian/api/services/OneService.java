@@ -2,7 +2,6 @@ package com.guardian.api.services;
 
 import com.guardian.Downstream;
 import com.guardian.api.OneProps;
-import com.guardian.api.response.guardian.GuardianResponse;
 import com.guardian.api.response.one.OneResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,8 +11,8 @@ import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static com.guardian.ExceptionsFactory.createHttpClientException;
-import static com.guardian.ExceptionsFactory.createHttpServerException;
+import static com.guardian.api.exceptions.ExceptionsFactory.createHttpClientException;
+import static com.guardian.api.exceptions.ExceptionsFactory.createHttpServerException;
 
 @Slf4j
 @Service
