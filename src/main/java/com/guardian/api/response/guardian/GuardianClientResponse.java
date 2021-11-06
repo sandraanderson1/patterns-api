@@ -1,20 +1,17 @@
 package com.guardian.api.response.guardian;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.guardian.api.dataModels.UserData;
-import com.guardian.api.response.guardian.GuardianArticle;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
+@Data
 public class GuardianClientResponse {
-    private UserData userData;
-    private String status;
-    private List<GuardianArticle> results;
-
-    public GuardianClientResponse(UserData userData, String status, List<GuardianArticle> results) {
-        this.userData = userData;
-        this.status = status;
-        this.results = results;
-    }
+    @JsonProperty
+    private final UserData userData;
+    @JsonProperty
+    private final String status;
+    @JsonProperty
+    private final List<GuardianArticle> results;
 }

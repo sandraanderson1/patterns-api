@@ -19,8 +19,8 @@ class CommonErrorHandlerTest<T> {
     @Mock
     private ClientResponse clientResponse;
 
-    private ErrorHandler<T> createCommonErrorHandler() {
-        return new CommonErrorHandler<>(new GuardianErrorHandler<>(null));
+    private ErrorHandler createCommonErrorHandler() {
+        return new CommonErrorHandler(new GuardianErrorHandler(null));
     }
 
     @BeforeEach

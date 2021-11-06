@@ -1,56 +1,43 @@
 package com.guardian.api.services;
 
 import com.guardian.Downstream;
-import com.guardian.api.OneProps;
+import com.guardian.api.DownstreamExecutor;
+import com.guardian.api.mappers.OneToClientResponseMapper;
+import com.guardian.api.properties.OneProps;
+import com.guardian.api.errorHandlers.CommonErrorHandler;
+import com.guardian.api.response.one.OneClientResponse;
 import com.guardian.api.response.one.OneResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static com.guardian.api.exceptions.ExceptionsFactory.createHttpClientException;
-import static com.guardian.api.exceptions.ExceptionsFactory.createHttpServerException;
-
 @Slf4j
 @Service
-public class OneService {
+public class OneService implements NewsService<OneClientResponse> {
 
     private final OneProps oneProps;
+    private final OneToClientResponseMapper oneToClientResponseMapper;
     private final WebClient webClient;
+    private final CommonErrorHandler errorHandler;
+    private final DownstreamExecutor<OneResponse> oneDownstreamExecutor;
 
     public OneService(OneProps oneProps,
-                      @Qualifier("override") WebClient webClient) {
+                      OneToClientResponseMapper oneToClientResponseMapper,
+                      @Qualifier("override") WebClient webClient,
+                      @Qualifier("oneExecutorConfig") DownstreamExecutor<OneResponse> oneDownstreamExecutor) {
         this.oneProps = oneProps;
+        this.oneToClientResponseMapper = oneToClientResponseMapper;
         this.webClient = webClient;
+        this.oneDownstreamExecutor = oneDownstreamExecutor;
+        this.errorHandler = new CommonErrorHandler(null);
     }
 
-    public Mono<OneResponse> read() {
-        return webClient
-                .get()
-                .uri(oneProps.getBaseUrl())
-                .exchangeToMono(this::handleResponse)
-                .doOnError(error -> log.error("Reported error: {}", error.getMessage()));
-    }
-
-    private Mono<OneResponse> handleResponse(ClientResponse response) {
-        if (response.statusCode().equals(HttpStatus.OK)) {
-            return response.bodyToMono(OneResponse.class);
-        } else if (response.statusCode().is4xxClientError()) {
-            logDownstreamError(response);
-            return Mono.error(createHttpClientException(Downstream.ONE));
-        } else if (response.statusCode().is5xxServerError()) {
-            logDownstreamError(response);
-            return Mono.error(createHttpServerException(Downstream.ONE));
-        } else {
-            logDownstreamError(response);
-            return response.createException().flatMap(Mono::error);
-        }
-    }
-
-    private void logDownstreamError(ClientResponse response) {
-        log.error("Reported error from Downstream: {}, {}", Downstream.ONE, response.statusCode());
+    @Override
+    public Mono<OneClientResponse> getNews() {
+        return oneDownstreamExecutor.execute(webClient, oneProps, errorHandler, Downstream.ONE)
+                .map(oneToClientResponseMapper);
+//                .doOnError(error -> log.error("API returning error: {}", error.getMessage()));
     }
 }

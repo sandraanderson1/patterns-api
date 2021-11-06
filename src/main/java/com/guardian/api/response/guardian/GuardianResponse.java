@@ -1,8 +1,9 @@
 package com.guardian.api.response.guardian;
 
-import lombok.Getter;
+import com.guardian.api.response.DownstreamResponse;
+import lombok.Data;
 
-@Getter
-public class GuardianResponse {
+@Data
+public class GuardianResponse implements DownstreamResponse {
     private GuardianDetailedResponse response;
 }

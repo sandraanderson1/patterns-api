@@ -33,7 +33,7 @@ class GuardianStrategyTest {
 
     @Test
     public void callDownstream_returnsGuardianClientResponse() {
-        given(service.read()).willReturn(Mono.just(GUARDIAN_CLIENT_RESPONSE));
+        given(service.getNews()).willReturn(Mono.just(GUARDIAN_CLIENT_RESPONSE));
         StepVerifier.create(strategy.callDownstream())
                 .expectNext(GUARDIAN_CLIENT_RESPONSE)
                 .verifyComplete();

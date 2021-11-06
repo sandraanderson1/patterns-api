@@ -1,8 +1,13 @@
 package com.guardian.api.response.one;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.guardian.api.response.DownstreamResponse;
+import lombok.Data;
+import lombok.NonNull;
 
-@Getter
-public class OneResponse {
-    String affirmation;
+@Data
+public class OneResponse implements DownstreamResponse {
+    @JsonProperty
+    @NonNull
+    private String affirmation;
 }

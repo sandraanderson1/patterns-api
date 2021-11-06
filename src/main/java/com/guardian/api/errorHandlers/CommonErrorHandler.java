@@ -7,14 +7,14 @@ import reactor.core.publisher.Mono;
 import static com.guardian.api.exceptions.ExceptionsFactory.createHttpClientException;
 import static com.guardian.api.exceptions.ExceptionsFactory.createHttpServerException;
 
-public class CommonErrorHandler<T> extends ErrorHandler<T> {
+public class CommonErrorHandler extends ErrorHandler {
 
-    public CommonErrorHandler(ErrorHandler<T> nextErrorHandler) {
+    public CommonErrorHandler(ErrorHandler nextErrorHandler) {
         super(nextErrorHandler);
     }
 
     @Override
-    public Mono<T> handleError(ClientResponse response, Downstream downstream) {
+    public <T> Mono<T> handleError(ClientResponse response, Downstream downstream) {
         if (response.statusCode().is4xxClientError()) {
             logDownstreamError(response, downstream);
             return Mono.error(createHttpClientException(downstream));
@@ -22,12 +22,16 @@ public class CommonErrorHandler<T> extends ErrorHandler<T> {
             logDownstreamError(response, downstream);
             return Mono.error(createHttpServerException(downstream));
         } else if (nextErrorHandler != null) {
+            logDownstreamError(response, downstream);
             return nextErrorHandler.handleError(response, downstream);
         }
         return Mono.empty();
     }
 
-    //have 2 different strategies - guardian + something else (another api) + header // DONE
-    //decorator for each api calls made
+    @Override
+    public String getName() {
+        return "Common";
+    }
+
     // 2 error handlers handing error responses from downstream ie. some error code will be handled differently between downstreams
 }

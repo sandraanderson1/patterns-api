@@ -1,5 +1,6 @@
 package com.guardian.api;
 
+import com.guardian.api.properties.GuardianProps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

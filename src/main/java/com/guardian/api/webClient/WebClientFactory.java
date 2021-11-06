@@ -1,6 +1,6 @@
 package com.guardian.api.webClient;
 
-import com.guardian.api.GuardianProps;
+import com.guardian.api.properties.GuardianProps;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;

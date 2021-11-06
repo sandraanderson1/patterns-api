@@ -1,4 +1,4 @@
-package com.guardian.api;
+package com.guardian.api.properties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +10,12 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "api.guardian")
-public class GuardianProps {
-    private String apiKey;
+@ConfigurationProperties(prefix = "api.one")
+public class OneProps implements DownstreamProps {
     private String baseUrl;
+
+    @Override
+    public String createDownstreamUrl() {
+        return baseUrl;
+    }
 }

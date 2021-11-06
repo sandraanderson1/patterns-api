@@ -10,14 +10,13 @@ public class GuardianStrategy implements DownstreamStrategy<GuardianClientRespon
 
     private GuardianService guardianService;
 
-    //add validators here Optional<String> validator :)
     public GuardianStrategy(GuardianService guardianService) {
         this.guardianService = guardianService;
     }
 
     @Override
     public Mono<GuardianClientResponse> callDownstream() {
-        return guardianService.read();
+        return guardianService.getNews();
     }
 
     @Override

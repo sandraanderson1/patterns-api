@@ -1,12 +1,12 @@
 package com.guardian.api.strategy;
 
-import com.guardian.api.response.one.OneResponse;
+import com.guardian.api.response.one.OneClientResponse;
 import com.guardian.api.services.OneService;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class OneStrategy implements DownstreamStrategy {
+public class OneStrategy implements DownstreamStrategy<OneClientResponse> {
 
     private OneService oneService;
 
@@ -15,12 +15,12 @@ public class OneStrategy implements DownstreamStrategy {
     }
 
     @Override
-    public Mono<OneResponse> callDownstream() {
-        return oneService.read();
+    public Mono<OneClientResponse> callDownstream() {
+        return oneService.getNews();
     }
 
     @Override
     public Strategy getStrategy() {
-        return null;
+        return Strategy.ONE;
     }
 }

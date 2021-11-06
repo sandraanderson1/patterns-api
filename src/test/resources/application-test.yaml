@@ -2,8 +2,8 @@ api:
   guardian:
     apiKey: test-key
     baseUrl: guardian-base-url/
-  oneline:
-    baseUrl: oneline-base-url/
+  one:
+    baseUrl: one-base-url/
   webClient:
     base:
         connectTimeoutMs: 200
@@ -17,11 +17,6 @@ api:
         readTimeoutMs: 500
         poolSize: 750
         totalRequestTimeout: 800
-  admin:
-    basicAuth:
-      credentials:
-        - username: ${BASIC_AUTH_USER:admin}
-          password: ${BASIC_AUTH_PASSWORD:admin}
 spring:
   config:
     activate:
