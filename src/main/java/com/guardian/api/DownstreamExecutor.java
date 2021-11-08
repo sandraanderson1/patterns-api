@@ -30,8 +30,6 @@ public class DownstreamExecutor<DownstreamResponse> {
                     } else {
                         return errorHandler.handleError(response, downstream);
                     }
-                })
-                .log()
-                .doOnEach(r -> log.info("what's this " + r.get()));
+                });
     }
 }
