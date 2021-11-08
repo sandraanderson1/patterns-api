@@ -37,7 +37,7 @@ public class OneService implements NewsService<OneClientResponse> {
     @Override
     public Mono<OneClientResponse> getNews() {
         return oneDownstreamExecutor.execute(webClient, oneProps, errorHandler, Downstream.ONE)
-                .map(oneToClientResponseMapper);
-//                .doOnError(error -> log.error("API returning error: {}", error.getMessage()));
+                .map(oneToClientResponseMapper)
+                .doOnError(error -> log.error("API returning error: {}", error.getMessage()));
     }
 }

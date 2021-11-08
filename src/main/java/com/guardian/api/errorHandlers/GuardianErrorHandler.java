@@ -30,7 +30,7 @@ public class GuardianErrorHandler extends ErrorHandler {
         return "Guardian";
     }
 
-    //have a generic error handler to manage the default errors .. not relevant to Guardian
+    //have a generic error handler to manage the default errors .. not relevant to Guardian - done
     //maybe swap order GuardianFrist then delegate to the common one to have the default stuff ..
     //chain what we want to run first
 }

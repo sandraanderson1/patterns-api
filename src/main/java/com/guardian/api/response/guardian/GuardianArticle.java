@@ -11,6 +11,12 @@ public class GuardianArticle {
     @JsonProperty
     private String type;
     @JsonProperty
+    @JsonIgnore
+    private String sectionId;
+    @JsonProperty
+    @JsonIgnore
+    private String sectionName;
+    @JsonProperty
     private String webTitle;
     @JsonProperty
     private String webUrl;

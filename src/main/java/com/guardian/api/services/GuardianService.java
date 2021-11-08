@@ -38,7 +38,6 @@ public class GuardianService implements NewsService<GuardianClientResponse> {
 
     @Override
     public Mono<GuardianClientResponse> getNews() {
-        System.out.println("From service: " + errorHandler.getName());
         return guardianDownstreamExecutor.execute(webClient, guardianProps, errorHandler, Downstream.GUARDIAN)
                 .map(guardianToClientResponseMapper)
                 .doOnError(error -> log.error("API returning error: {}", error.getMessage()));

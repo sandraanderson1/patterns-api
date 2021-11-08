@@ -1,7 +1,6 @@
 package com.guardian.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.guardian.api.errorHandlers.CommonErrorHandler;
 import com.guardian.api.errorHandlers.GuardianErrorHandler;
 import com.guardian.api.exceptions.UnsupportedOperationException;
@@ -25,17 +24,16 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import static com.guardian.Downstream.GUARDIAN;
 import static com.guardian.Downstream.ONE;
+import static com.guardian.api.ApplicationTests.mockGuardianResponse;
+import static com.guardian.api.ApplicationTests.mockOneResponse;
 import static com.guardian.api.exceptions.ExceptionsFactory.*;
-import static java.nio.file.Files.readAllBytes;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -51,7 +49,6 @@ class DownstreamExecutorTest {
     private static WebClient webClient;
     private static DownstreamExecutor<GuardianResponse> guardianDownstreamExecutor;
     private static DownstreamExecutor<OneResponse> oneDownstreamExecutor;
-    private static ObjectMapper mapper;
 
     @Autowired
     private GuardianProps guardianProps;
@@ -70,13 +67,11 @@ class DownstreamExecutorTest {
 
     @BeforeEach
     public void setUp() {
-        Hooks.onOperatorDebug();
         guardianDownstreamExecutor = new DownstreamExecutor<>(GuardianResponse.class);
         oneDownstreamExecutor = new DownstreamExecutor<>(OneResponse.class);
         webClient = WebClient.create(mockWebServer.url("/").toString());
         mockResponse = new MockResponse();
         mockResponse.addHeader("Content-Type", "application/json; charset=utf-8");
-        mapper = new ObjectMapper();
     }
 
     @Test
@@ -151,14 +146,6 @@ class DownstreamExecutorTest {
                 .expectErrorMatches(throwable -> throwable instanceof HttpServerErrorException &&
                         throwable.getMessage().equals("500 Downstream ONE has failed"))
                 .verify();
-    }
-
-    private String mockGuardianResponse() throws IOException {
-        return new String(readAllBytes(Paths.get("src/test/resources/response.json")));
-    }
-
-    private String mockOneResponse() throws JsonProcessingException {
-        return mapper.writeValueAsString("response");
     }
 
     @AfterAll
